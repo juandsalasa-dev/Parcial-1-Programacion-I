@@ -32,6 +32,8 @@ public class Servicio {
         this.listReservaServicios = new ArrayList<>();
     }
 
+
+    //TO STRING
     @Override
     public String toString() {
         return "Servicio{" +
@@ -44,6 +46,7 @@ public class Servicio {
                 '}';
     }
 
+    //TODOS LOS GETTERS Y SETTERS DE LA CLASE SERVICIO
     public int getCodigo() {
         return codigo;
     }

@@ -36,6 +36,7 @@ public class Hotel {
         this.listServiciosHotel = new ArrayList<>();
     }
 
+    //TO STRING
     @Override
     public String toString() {
         return "Hotel{" +
@@ -51,6 +52,7 @@ public class Hotel {
                 '}';
     }
 
+    //TODOS LOS GETTERS Y SETTERS DE LA CLASE HOTEL
     public int getTelefono() {
         return telefono;
     }

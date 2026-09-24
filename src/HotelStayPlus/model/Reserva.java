@@ -39,6 +39,7 @@ public class Reserva {
         this.valorTotal = valorTotal;
     }
 
+    //TO STRING
     @Override
     public String toString() {
         return "Reserva{" +
@@ -55,6 +56,7 @@ public class Reserva {
                 '}';
     }
 
+    //TODOS LOS GETTERS Y SETTERS DE LA CLASE RESERVA
     public int getCodigo() {
         return codigo;
     }

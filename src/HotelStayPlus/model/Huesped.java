@@ -27,6 +27,7 @@ public class Huesped {
         this.telefono = telefono;
     }
 
+    //TO STRING
     @Override
     public String toString() {
         return "Huesped{" +
@@ -39,6 +40,7 @@ public class Huesped {
                 '}';
     }
 
+    //TODOS LOS GETTERS Y SETTERS DE LA CLASE HUESPED
     public String getNombre() {
         return nombre;
     }

@@ -12,7 +12,6 @@ public class Habitacion {
     //RELACIONES
     private List<Reserva> listaReservasHabitaciones;
 
-
     /**
      *Método Constructor de la clase Habitacion
      * @param numero
@@ -32,6 +31,7 @@ public class Habitacion {
      this.tipo = tipo;
      }
 
+    //TO STRING
     @Override
     public String toString() {
         return "Habitacion{" +
@@ -45,6 +45,7 @@ public class Habitacion {
                 '}';
     }
 
+    //TODOS LOS GETTERS Y SETTERS DE LA CLASE HABITACION
     public int getNumero() {
         return numero;
     }
