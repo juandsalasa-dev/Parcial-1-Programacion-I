@@ -26,7 +26,7 @@ public class Reserva {
      * @param huesped
      * @param habitacion
      */
-    private Reserva (int codigo, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, String metodoPago, double valorTotal, Huesped huesped, Habitacion habitacion){
+    public Reserva (int codigo, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, String metodoPago, double valorTotal, Huesped huesped, Habitacion habitacion, ArrayList<Servicio>listaServicios){
         this.codigo = codigo;
         this.estado = estado;
         this.fechaEntrada = fechaEntrada;
@@ -34,11 +34,12 @@ public class Reserva {
         this.fechaSalida = fechaSalida;
         this.habitacion = habitacion;
         this.huesped = huesped;
-        this.ListServicio = new ArrayList<>();
+        this.ListServicio = listaServicios;
         this.metodoPago = metodoPago;
         this.valorTotal = valorTotal;
     }
 
+    //TO STRING
     @Override
     public String toString() {
         return "Reserva{" +
@@ -55,6 +56,7 @@ public class Reserva {
                 '}';
     }
 
+    //TODOS LOS GETTERS Y SETTERS DE LA CLASE RESERVA
     public int getCodigo() {
         return codigo;
     }

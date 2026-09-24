@@ -18,7 +18,7 @@ public class Huesped {
      * @param id
      * @param telefono
      */
-    private Huesped(String nombre, String correo, String pais, int id, int telefono){
+    public Huesped(String nombre, String correo, String pais, int id, int telefono){
         this.correo = correo;
         this.id = id;
         this.listReservasHuesped = new ArrayList<>();
@@ -27,6 +27,7 @@ public class Huesped {
         this.telefono = telefono;
     }
 
+    //TO STRING
     @Override
     public String toString() {
         return "Huesped{" +
@@ -39,6 +40,7 @@ public class Huesped {
                 '}';
     }
 
+    //TODOS LOS GETTERS Y SETTERS DE LA CLASE HUESPED
     public String getNombre() {
         return nombre;
     }
