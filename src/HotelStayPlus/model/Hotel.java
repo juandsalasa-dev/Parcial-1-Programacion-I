@@ -40,6 +40,12 @@ public class Hotel {
 
 
     //VERIFICAR SI UN NUMERO ES PERFECTO
+
+    /**
+     * ;etodo para determinar si el numero de celular de un huesped es perfecto
+     * @param id del huesped
+     * @return
+     */
     public static String  verificarNumeroPerfecto(int id){
 
 
@@ -112,7 +118,7 @@ public class Hotel {
 
     /**
      * Método para actualizar datos del Huesped
-     * @param id
+     * @param id del huesped
      * @param nuevoNombre del huesped
      * @param nuevoCorreo del huesped
      * @param nuevoTelefono del huesped
@@ -132,7 +138,7 @@ public class Hotel {
 
     /**
      * Método Para eliminar huesped
-     * @param id
+     * @param id del huesped
      * @return
      */
     public static String eliminarHuesped  (int id){
@@ -217,7 +223,7 @@ public class Hotel {
 
     /**
      * Método para buscar reserva
-     * @param codigo
+     * @param codigo de la reserva
      * @return
      */
     public static Reserva buscarReserva (int codigo){
@@ -235,9 +241,9 @@ public class Hotel {
 
     /**
      * Método para Actualizar la reserva
-     * @param codigo
-     * @param nuevoEstado
-     * @param nuevoMetodoPago
+     * @param codigo de la reserva
+     * @param nuevoEstado de la reserva
+     * @param nuevoMetodoPago de la reserva
      * @return
      */
     public static boolean actualizarReserva(int codigo, String nuevoEstado, String nuevoMetodoPago){
@@ -254,7 +260,7 @@ public class Hotel {
 
     /**
      * Método para eliminar una reserva
-     * @param codigo
+     * @param codigo de la reserva
      * @return
      */
 
@@ -269,6 +275,12 @@ public class Hotel {
 
     //
     // MÉTODO PARA SUMAR LOS INGRESOS EN DETERMINADA FECHA
+
+    /**
+     *  MÉTODO PARA SUMAR LOS INGRESOS EN DETERMINADA FECHA
+     * @param fecha de la realizacion de la reserva
+     * @return
+     */
     public static double  sumarIngresos(String fecha ){
 
         double ingreso=0;
