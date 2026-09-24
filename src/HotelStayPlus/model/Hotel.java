@@ -38,8 +38,34 @@ public class Hotel {
 
     }
 
+
+    //VERIFICAR SI UN NUMERO ES PERFECTO
+    public static boolean verificarNumeroPerfecto(int id){
+        //Verificar que no sea 1
+        if (id <= 1) {
+            return false;
+        }
+        int sumaDivisores = 1;
+
+        // Buscamos divisores
+        for (int i = 2; i * i <= id; i++) {
+            if (id % i == 0) {
+                sumaDivisores += i;
+
+                //Si es asi, se añade
+                if (i != id / i) {
+                    sumaDivisores += id / i;
+                }
+            }
+        }
+
+        // Si la suma de los divisores es igual al número, es perfecto
+        return sumaDivisores == id;
+    }
+
+    //SECCION CRUD HUESPED
     /**
-     * Metodo para registrar un huesped
+     * Método para registrar un huesped
      * @param nombre del huesped
      * @param id del huesped
      * @param correo del huesped
@@ -48,14 +74,10 @@ public class Hotel {
      * @param pais del huesped
      * @return
      */
-
     public String  registrarHuesped (String nombre,int id,String correo, int telefono, String direccion, String pais ){
-
         String mensaje="";
-      Huesped encontrado= buscarHuesped(id);
-
+        Huesped encontrado= buscarHuesped(id);
         if (encontrado==null){
-
           Huesped huesped= new Huesped(nombre,correo, pais, id, telefono);
           listHuespedesHotel.add(huesped);
 
@@ -68,7 +90,7 @@ public class Hotel {
 
 
     /**
-     * metdodo para buscar huesped
+     * Método para buscar huesped
      * @param id del huesped
      * @return
      */
@@ -84,20 +106,17 @@ public class Hotel {
         return encontrado;
     }
 
+
     /**
-     * metodo para actualizar datos del Huesped
+     * Método para actualizar datos del Huesped
      * @param id
      * @param nuevoNombre del huesped
      * @param nuevoCorreo del huesped
      * @param nuevoTelefono del huesped
      * @param nuevoPpais del huesped
      */
-
-
     public static void  actualizarHuesped(int id, String nuevoNombre, String nuevoCorreo, int nuevoTelefono, String nuevoPpais){
-
         Huesped huesped = buscarHuesped(id);
-
         if (huesped != null){
             huesped.setId(id);
             huesped.setNombre(nuevoNombre);
@@ -107,16 +126,14 @@ public class Hotel {
         }
     }
 
+
     /**
-     * metodo Para eliminar huesped
+     * Método Para eliminar huesped
      * @param id
      * @return
      */
-
     public static String eliminarHuesped  (int id){
-
         String mensaje= "No se encontro el huesped";
-
         Huesped huesped= buscarHuesped(id );
         if(huesped!=null){
             listHuespedesHotel.remove(huesped);
@@ -126,16 +143,15 @@ public class Hotel {
         return mensaje;
     }
 
+
+    //SECCION SERVICIOS AÑADIR/BUSCAR
     /**
-     * Metodo para añadir servicios a la reserva
+     * Método para añadir servicios a la reserva
      * @return
      */
     public static  ArrayList<Servicio> añadirServicios(){
-
         ArrayList<Servicio> servicios= new ArrayList<>();
-
         int opcion;
-
         do{
             int codigo= Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo del Servicio"));
             Servicio servicio= buscarServicio(codigo);
@@ -149,14 +165,13 @@ public class Hotel {
         return servicios;
     }
 
+
     /**
-     * metodo para buscar servicio
+     * Método para buscar servicio
      * @param codigo del servicio
      * @return
      */
-
     public static Servicio buscarServicio (int codigo){
-
         Servicio encontrado= null;
         for(int i=0; i<listServiciosHotel.size();i++){
             Servicio servicio = listServiciosHotel.get(i);
@@ -167,75 +182,10 @@ public class Hotel {
         return encontrado;
     }
 
+
+    //SECCION CRUD RESERVA
     /**
-     * Metodo para verificar disponibilidad de la habitacion
-     * @param habitacion de la reserva
-     * @return
-     */
-
-    public static boolean verificarhabitacion(Habitacion habitacion ){
-
-        boolean pass= false;
-        if(habitacion.getEstado().equalsIgnoreCase("Disponible")){
-
-            pass=true;
-        }
-
-        return pass;
-
-    }
-
-    /**
-     * metodo para buscar habitacion
-     * @param numHabitacion del hotel
-     * @return
-     */
-
-    public static Habitacion buscarHabitacion (int numHabitacion){
-
-        Habitacion encontrado=null;
-
-        for(int i= 0; i<listHabitacionesHotel.size(); i++){
-
-            Habitacion habitacion= listHabitacionesHotel.get(i);
-
-            if(habitacion.getNumero()==numHabitacion&&verificarhabitacion(habitacion)){
-
-                encontrado=habitacion;
-
-                habitacion.setEstado("ocupada");
-
-            }
-
-        }
-        return encontrado;
-    }
-
-
-    /**
-     * Metdod para calcular el precio total de la reserva
-     * @param habitacion de la reserva
-     * @param listaServicio de la reserva
-     * @param descuento de la reserva
-     * @return
-     */
-    public static double calcularTotal( Habitacion habitacion, ArrayList<Servicio> listaServicio, double descuento){
-
-        double precioNoche= habitacion.getPrecioNoche();
-        double totalServicio=0;
-
-        for( Servicio servicio: listaServicio){
-
-            totalServicio+=servicio.getPrecio();
-        }
-        double total= precioNoche+totalServicio;
-         total= total-((total/100)*descuento);
-
-         return total;
-    }
-
-    /**
-     * metodo para registrar reserva
+     * Método para registrar reserva
      * @param codigo de la reserva
      * @param fechaRealizacion de la reserva
      * @param fechaEntrada de la reserva
@@ -248,7 +198,6 @@ public class Hotel {
      * @param listaServicios de la reserva
      * @return
      */
-
     public static String registrarReserva(int codigo, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, String metodoPago, double valorTotal, Huesped huesped, Habitacion habitacion, ArrayList<Servicio>listaServicios){
         String mensaje ="";
         if (Hotel.buscarReserva(codigo)==null&&habitacion!=null){
@@ -262,29 +211,128 @@ public class Hotel {
         return mensaje;
     }
 
+
     /**
-     * metodo para buscar reserva
+     * Método para buscar reserva
      * @param codigo
      * @return
      */
-
     public static Reserva buscarReserva (int codigo){
-
         Reserva encontrado = null;
-
         for (int i=0; i<listReservasHotel.size(); i++){
-
             Reserva reserva= listReservasHotel.get(i);
-
             if (reserva.getCodigo()==codigo){
 
                 encontrado=reserva;
             }
         }
-
         return encontrado;
     }
 
+
+    /**
+     * Método para Actualizar la reserva
+     * @param codigo
+     * @param nuevoEstado
+     * @param nuevoMetodoPago
+     * @return
+     */
+    public static Reserva actualizarReserva(int codigo, String nuevoEstado, String nuevoMetodoPago){
+        boolean actualizado = false;
+        Reserva reserva = buscarReserva(codigo);
+        if (reserva != null) {
+            reserva.setEstado(nuevoEstado);
+            reserva.setMetodoPago(nuevoMetodoPago);
+            actualizado = true;
+        }
+        return actualizado;
+    }
+
+
+    /**
+     * Método para eliminar una reserva
+     * @param codigo
+     * @return
+     */
+    public static Reserva borrarReserva(int codigo) {
+        Reserva reserva = buscarReserva(codigo);
+        if (reserva != null) {
+            listReservasHotel.remove(reserva);
+            return true;
+        }
+        return false;
+    }
+
+    //
+    // MÉTODO PARA SUMAR LOS INGRESOS EN DETERMINADA FECHA
+    public void sumarIngresosPorRango(String fechaInicio, String fechaFinal) {
+        double sumaTotal = 0;
+
+        for (Reserva reserva : listReservasHotel) {
+            // Verificar si la fecha está dentro del rango
+            if ((fechaRealizacion.isEqual(fechaInicio) || fechaSalida.isAfter(fechaInicio)) &&
+                    (fechaSalida.isEqual(fechaFinal) || fechaSalida.isBefore(fechaFinal))) {
+
+                sumaTotal += reserva.getValorTotal();
+            }
+        }
+
+        // Mostrar el total acumulado
+        JOptionPane.showMessageDialog(null, "El total de ingresos entre " + fechaInicio + " y " + fechaFinal + " es: $" + sumaTotal);
+    }
+
+
+    //SECCION HABITACION ESTADO/BUSCAR
+    /**
+     * Método para verificar disponibilidad de la habitacion
+     * @param habitacion de la reserva
+     * @return
+     */
+    public static boolean verificarHabitacion(Habitacion habitacion ){
+        boolean pass= false;
+        if(habitacion.getEstado().equalsIgnoreCase("Disponible")){
+            pass=true;
+        }
+        return pass;
+    }
+
+    /**
+     * Método para buscar habitacion
+     * @param numHabitacion del hotel
+     * @return
+     */
+    public static Habitacion buscarHabitacion (int numHabitacion){
+        Habitacion encontrado=null;
+
+        for(int i= 0; i<listHabitacionesHotel.size(); i++){
+            Habitacion habitacion= listHabitacionesHotel.get(i);
+            if(habitacion.getNumero()==numHabitacion&&verificarhabitacion(habitacion)){
+                encontrado=habitacion;
+                habitacion.setEstado("ocupada");
+            }
+        }
+        return encontrado;
+    }
+
+
+    //CALCULAR PRECIOS
+    /**
+     * Método para calcular el precio total de la reserva
+     * @param habitacion de la reserva
+     * @param listaServicio de la reserva
+     * @param descuento de la reserva
+     * @return
+     */
+    public static double calcularTotal( Habitacion habitacion, ArrayList<Servicio> listaServicio, double descuento){
+        double precioNoche= habitacion.getPrecioNoche();
+        double totalServicio=0;
+        for( Servicio servicio: listaServicio){
+            totalServicio+=servicio.getPrecio();
+        }
+        double total= precioNoche+totalServicio;
+         total= total-((total/100)*descuento);
+         return total;
+    }
 
 
     //TO STRING
