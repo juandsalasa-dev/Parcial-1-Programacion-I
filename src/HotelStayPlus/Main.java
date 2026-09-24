@@ -112,7 +112,7 @@ public class Main {
                         //INGRESAR FECHAS DE LA RESERVA
                         String fechaRealizacion= JOptionPane.showInputDialog("Ingrese la fecha de realizacion (día/mes/año)");
                         String fechaEntrada= JOptionPane.showInputDialog("Ingrese la fecha de entrada (día/mes/año):");
-                        String fechaSalida= JOptionPane.showInputDialog("Ingrese la fecha de salida (día/mes/año):"");
+                        String fechaSalida= JOptionPane.showInputDialog("Ingrese la fecha de salida (día/mes/año)");
                         int numHabitacion= Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero de habitacion a reservar"));
                         Habitacion habitacion=Hotel.buscarHabitacion(numHabitacion);
 
@@ -154,8 +154,9 @@ public class Main {
                         //VER DISPONIBILIDAD HABITACION
                     } else if (opcion3 == 5){
                         int numHabitacion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el código de la reserva a borrar:"));
+                        Habitacion estado= Hotel.buscarHabitacion(numHabitacion);
 
-                        hotel.verificarHabitacion(numHabitacion);
+                        JOptionPane.showMessageDialog(null,estado.getEstado() );
 
                     } else if (opcion3 == 6){
                         break;
@@ -165,17 +166,18 @@ public class Main {
 
                 // NUMERO PERFECTO
                 case 3:
-                    int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Escribe el id del huesped: "));
+                    int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Escribe el id del huesped: "));
 
-                    hotel.verificarNumeroPerfecto(numero);
+                    String perfecto = hotel.verificarNumeroPerfecto(id);
+
+                    JOptionPane.showMessageDialog(null, perfecto);
 
 
                 // SUMAR TODOS LOS PRECIOS (INGRESOS) DE LAS RESERVAS HECHAS EN UN RANGO DE FECHA
                 case 4:
-                    String fechaInicio = JOptionpane.showInputDialog(null, "Ingresa la fecha de inicio (día/mes/año):")
-                    String fechaFinal = JOptionpane.showInputDialog(null, "Ingresa la fecha final (día/mes/año):")
-
-                    hotel.sumarIngresosPorRango(fechaInicio, fechaFinal);
+                   String fecha= JOptionPane.showInputDialog("Ingrese la fecha a consultar");
+                   Double ingreso= Hotel.sumarIngresos(fecha);
+                   JOptionPane.showMessageDialog(null, "El ingreso total para esta fecha es: "+ingreso);
 
                 //SALIR
                 case 5:

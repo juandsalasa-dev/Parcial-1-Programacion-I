@@ -40,27 +40,30 @@ public class Hotel {
 
 
     //VERIFICAR SI UN NUMERO ES PERFECTO
-    public static boolean verificarNumeroPerfecto(int id){
-        //Verificar que no sea 1
-        if (id <= 1) {
-            return false;
-        }
-        int sumaDivisores = 1;
+    public static String  verificarNumeroPerfecto(int id){
 
-        // Buscamos divisores
-        for (int i = 2; i * i <= id; i++) {
-            if (id % i == 0) {
-                sumaDivisores += i;
 
-                //Si es asi, se añade
-                if (i != id / i) {
-                    sumaDivisores += id / i;
-                }
+        Huesped huesped= buscarHuesped(id);
+
+        String mensaje = "Sr/a. "+huesped.getNombre()+" no tiene numero de telefono perfecto";
+
+        int divisores =0;
+
+        for(int i=0; i< huesped.getTelefono();i++){
+
+            if(huesped.getTelefono()%i==0){
+
+                divisores+=i;
             }
         }
 
-        // Si la suma de los divisores es igual al número, es perfecto
-        return sumaDivisores == id;
+        if (divisores==huesped.getTelefono()){
+
+            mensaje = "Sr/a. "+huesped.getNombre()+" tiene numero de telefono perfecto";
+        }
+
+        return mensaje;
+
     }
 
     //SECCION CRUD HUESPED
@@ -237,7 +240,7 @@ public class Hotel {
      * @param nuevoMetodoPago
      * @return
      */
-    public static Reserva actualizarReserva(int codigo, String nuevoEstado, String nuevoMetodoPago){
+    public static boolean actualizarReserva(int codigo, String nuevoEstado, String nuevoMetodoPago){
         boolean actualizado = false;
         Reserva reserva = buscarReserva(codigo);
         if (reserva != null) {
@@ -254,7 +257,8 @@ public class Hotel {
      * @param codigo
      * @return
      */
-    public static Reserva borrarReserva(int codigo) {
+
+    public static boolean  borrarReserva(int codigo) {
         Reserva reserva = buscarReserva(codigo);
         if (reserva != null) {
             listReservasHotel.remove(reserva);
@@ -265,20 +269,19 @@ public class Hotel {
 
     //
     // MÉTODO PARA SUMAR LOS INGRESOS EN DETERMINADA FECHA
-    public void sumarIngresosPorRango(String fechaInicio, String fechaFinal) {
-        double sumaTotal = 0;
+    public static double  sumarIngresos(String fecha ){
 
-        for (Reserva reserva : listReservasHotel) {
-            // Verificar si la fecha está dentro del rango
-            if ((fechaRealizacion.isEqual(fechaInicio) || fechaSalida.isAfter(fechaInicio)) &&
-                    (fechaSalida.isEqual(fechaFinal) || fechaSalida.isBefore(fechaFinal))) {
+        double ingreso=0;
 
-                sumaTotal += reserva.getValorTotal();
+        for(Reserva reserva: listReservasHotel){
+
+            if (reserva.getFechaRealizacion().equalsIgnoreCase(fecha)){
+
+                ingreso+=reserva.getValorTotal();
             }
         }
 
-        // Mostrar el total acumulado
-        JOptionPane.showMessageDialog(null, "El total de ingresos entre " + fechaInicio + " y " + fechaFinal + " es: $" + sumaTotal);
+        return ingreso;
     }
 
 
@@ -306,7 +309,7 @@ public class Hotel {
 
         for(int i= 0; i<listHabitacionesHotel.size(); i++){
             Habitacion habitacion= listHabitacionesHotel.get(i);
-            if(habitacion.getNumero()==numHabitacion&&verificarhabitacion(habitacion)){
+            if(habitacion.getNumero()==numHabitacion&&verificarHabitacion(habitacion)){
                 encontrado=habitacion;
                 habitacion.setEstado("ocupada");
             }
