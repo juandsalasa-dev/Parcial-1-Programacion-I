@@ -12,7 +12,7 @@ public class Servicio {
     public boolean disponibilidad;
 
     //RELACIONES
-    private List<Reserva> listReservaServicios;
+    private static List<Reserva> listReservaServicios;
 
     /**
      * Método Constructor de la clase Servicio

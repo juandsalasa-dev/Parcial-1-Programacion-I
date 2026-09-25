@@ -12,8 +12,8 @@ public class Hotel {
     //RELACIONES
     private static List<Huesped> listHuespedesHotel;
     private static List<Reserva> listReservasHotel;
-    private static List<Habitacion> listHabitacionesHotel;
-    private static List<Servicio> listServiciosHotel;
+    public static List<Habitacion> listHabitacionesHotel;
+    public static List<Servicio> listServiciosHotel;
 
 
     /**
@@ -42,7 +42,7 @@ public class Hotel {
     //VERIFICAR SI UN NUMERO ES PERFECTO
 
     /**
-     * ;etodo para determinar si el numero de celular de un huesped es perfecto
+     * Metodo para determinar si el numero de celular de un huesped es perfecto
      * @param id del huesped
      * @return
      */
@@ -55,7 +55,7 @@ public class Hotel {
 
         int divisores =0;
 
-        for(int i=0; i< huesped.getTelefono();i++){
+        for(int i=1; i< huesped.getTelefono();i++){
 
             if(huesped.getTelefono()%i==0){
 
@@ -79,11 +79,10 @@ public class Hotel {
      * @param id del huesped
      * @param correo del huesped
      * @param telefono del huesped
-     * @param direccion del huesped
      * @param pais del huesped
      * @return
      */
-    public String  registrarHuesped (String nombre,int id,String correo, int telefono, String direccion, String pais ){
+    public String  registrarHuesped (String nombre,int id,String correo, int telefono, String pais ){
         String mensaje="";
         Huesped encontrado= buscarHuesped(id);
         if (encontrado==null){
@@ -207,13 +206,17 @@ public class Hotel {
      * @param listaServicios de la reserva
      * @return
      */
-    public static String registrarReserva(int codigo, String fechaRealizacion, String fechaEntrada, String fechaSalida, String estado, String metodoPago, double valorTotal, Huesped huesped, Habitacion habitacion, ArrayList<Servicio>listaServicios){
+    public static String registrarReserva(int codigo, String fechaRealizacion, String fechaEntrada,
+                                          String fechaSalida, String estado, String metodoPago, double valorTotal,
+                                          Huesped huesped, Habitacion habitacion, ArrayList<Servicio>listaServicios){
         String mensaje ="";
         if (Hotel.buscarReserva(codigo)==null&&habitacion!=null){
 
-            Reserva reserva=new Reserva(codigo,fechaRealizacion,fechaEntrada,fechaSalida, estado, metodoPago,valorTotal,huesped,habitacion, listaServicios);
+            Reserva reserva=new Reserva(codigo,fechaRealizacion,fechaEntrada,fechaSalida, estado,
+                    metodoPago,valorTotal,huesped,habitacion, listaServicios);
             listReservasHotel.add(reserva);
             mensaje="Registro exitoso";
+            habitacion.setEstado("ocupado");
         }else{
             mensaje="No se pudo realizar el regitro ya que las rerserva ya existe o la habitacion no esta disponible";
         }
@@ -273,7 +276,7 @@ public class Hotel {
         return false;
     }
 
-    //
+
     // MÉTODO PARA SUMAR LOS INGRESOS EN DETERMINADA FECHA
 
     /**
@@ -323,7 +326,6 @@ public class Hotel {
             Habitacion habitacion= listHabitacionesHotel.get(i);
             if(habitacion.getNumero()==numHabitacion&&verificarHabitacion(habitacion)){
                 encontrado=habitacion;
-                habitacion.setEstado("ocupada");
             }
         }
         return encontrado;

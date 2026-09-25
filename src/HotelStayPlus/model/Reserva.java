@@ -12,7 +12,7 @@ public class Reserva {
     //RELACIONES
     private Huesped huesped;
     private Habitacion habitacion;
-    private List<Servicio> ListServicio;
+    private static List<Servicio> ListServicio;
 
     /**
      * Método Constructor de la clase Reserva
@@ -137,6 +137,3 @@ public class Reserva {
         ListServicio = listServicio;
     }
 }
-
-
-

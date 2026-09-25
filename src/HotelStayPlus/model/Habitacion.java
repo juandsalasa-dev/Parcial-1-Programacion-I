@@ -10,7 +10,7 @@ public class Habitacion {
     public String tipo, estado;
 
     //RELACIONES
-    private List<Reserva> listaReservasHabitaciones;
+    private static List<Reserva> listaReservasHabitaciones;
 
     /**
      *Método Constructor de la clase Habitacion

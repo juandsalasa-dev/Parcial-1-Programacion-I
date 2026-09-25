@@ -8,7 +8,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        //CREACION OBJETOS PLANTILLA PARA NO INICIAR VACÍO
         Hotel hotel = new Hotel(301101010, 94952399, "stayhotelplus.com", "Avenida Centenario", "stayhotelplus.com");
+
+        //Estos objetos se crearon para hacer la prueba de todo el código, el administración del hotel
+        // es quien se encarga de crear las habitaciones y servicios correspondientes.
+        Habitacion habitacion = new Habitacion(100, 1, 3, 3000, "familiar", "disponible");
+        Hotel.listHabitacionesHotel.add(habitacion);
+        Servicio servicio = new Servicio(1, 2000, "Limpieza", "Limpia", true);
+        Hotel.listServiciosHotel.add(servicio);
 
         int opcion = 0;
         int opcion1 = 0;
@@ -48,10 +56,9 @@ public class Main {
                         int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la identificación del huesped:"));
                         String correo = JOptionPane.showInputDialog(null, "Ingrese el correo del huesped:");
                         int telefono = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el teléfono del huesped:"));
-                        String direccion = JOptionPane.showInputDialog(null, "Ingrese la dirección del huesped:");
                         String pais = JOptionPane.showInputDialog(null, "Ingrese el pais de origen:");
 
-                        hotel.registrarHuesped(nombre, id, correo, telefono, direccion, pais);
+                        hotel.registrarHuesped(nombre, id, correo, telefono, pais);
 
                         //MOSTRAR HUESPED
                     } else if (opcion3 == 2) {
@@ -110,14 +117,14 @@ public class Main {
                         Huesped huesped= Hotel.buscarHuesped(id);
 
                         //INGRESAR FECHAS DE LA RESERVA
-                        String fechaRealizacion= JOptionPane.showInputDialog("Ingrese la fecha de realizacion (día/mes/año)");
-                        String fechaEntrada= JOptionPane.showInputDialog("Ingrese la fecha de entrada (día/mes/año):");
-                        String fechaSalida= JOptionPane.showInputDialog("Ingrese la fecha de salida (día/mes/año)");
-                        int numHabitacion= Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero de habitacion a reservar"));
-                        Habitacion habitacion=Hotel.buscarHabitacion(numHabitacion);
+                        String fechaRealizacion = JOptionPane.showInputDialog("Ingrese la fecha de realizacion (día/mes/año)");
+                        String fechaEntrada = JOptionPane.showInputDialog("Ingrese la fecha de entrada (día/mes/año):");
+                        String fechaSalida = JOptionPane.showInputDialog("Ingrese la fecha de salida (día/mes/año)");
+                        int numHabitacion = Integer.parseInt(JOptionPane.showInputDialog("ingrese el numero de habitacion a reservar"));
+                        Habitacion habitacion1 = Hotel.buscarHabitacion(numHabitacion);
 
                         //REVISAR EL ESTADO DE LA RESERVA
-                        String estado= JOptionPane.showInputDialog("Ingrese el estado inicial de la reserva");
+                        String estado= JOptionPane.showInputDialog("Ingrese el estado inicial de la reserva (ocupado/disponible)");
                         ArrayList<Servicio> listaServicios= Hotel.añadirServicios();
 
                         //REALIZAR DESCUENTO Y MOSTRAR PRECIO
@@ -153,10 +160,10 @@ public class Main {
 
                         //VER DISPONIBILIDAD HABITACION
                     } else if (opcion3 == 5){
-                        int numHabitacion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el código de la reserva a borrar:"));
+                        int numHabitacion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el número de la habitacion:"));
                         Habitacion estado= Hotel.buscarHabitacion(numHabitacion);
 
-                        JOptionPane.showMessageDialog(null,estado.getEstado() );
+                        JOptionPane.showMessageDialog(null, habitacion.getEstado() );
 
                     } else if (opcion3 == 6){
                         break;
@@ -171,13 +178,14 @@ public class Main {
                     String perfecto = hotel.verificarNumeroPerfecto(id);
 
                     JOptionPane.showMessageDialog(null, perfecto);
-
+                    break;
 
                 // SUMAR TODOS LOS PRECIOS (INGRESOS) DE LAS RESERVAS HECHAS EN UN RANGO DE FECHA
                 case 4:
                    String fecha= JOptionPane.showInputDialog("Ingrese la fecha a consultar");
                    Double ingreso= Hotel.sumarIngresos(fecha);
                    JOptionPane.showMessageDialog(null, "El ingreso total para esta fecha es: "+ingreso);
+                    break;
 
                 //SALIR
                 case 5:

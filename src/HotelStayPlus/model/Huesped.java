@@ -9,7 +9,7 @@ public class Huesped {
     private int id, telefono;
 
     //RELACIONES
-    private List<Reserva> listReservasHuesped;
+    private static List<Reserva> listReservasHuesped;
 
     /**
      * Método Constructor de la clase Huésped
