@@ -24,7 +24,7 @@ public class Main {
                     1. Huespedes
                     2. Reservas
                     3. Calcular numero perfecto
-                    4. Sumar ingresos de todas las reservas
+                    4. Mostrar ingreso del dia 
                     5. Saliendo
                     """));
 

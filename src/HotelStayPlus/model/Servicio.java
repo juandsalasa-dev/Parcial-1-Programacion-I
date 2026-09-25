@@ -22,7 +22,7 @@ public class Servicio {
      * @param descripcion
      * @param disponibilidad
      */
-    private Servicio (int codigo, double precio, String nombre, String descripcion, boolean disponibilidad){
+    public  Servicio (int codigo, double precio, String nombre, String descripcion, boolean disponibilidad){
         this.codigo = codigo;
         this.precio = precio;
         this.disponibilidad = disponibilidad;

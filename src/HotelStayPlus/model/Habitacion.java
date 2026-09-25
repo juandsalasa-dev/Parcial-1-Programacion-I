@@ -21,7 +21,7 @@ public class Habitacion {
      * @param tipo
      * @param estado
      */
-    private Habitacion(int numero, int piso, int capMaxima, double precioNoche, String tipo, String estado){
+    public  Habitacion(int numero, int piso, int capMaxima, double precioNoche, String tipo, String estado){
      this.capMaxima = capMaxima;
      this.estado = estado;
      this.listaReservasHabitaciones = new ArrayList<>();
